@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindshort App | Mindshort</title>
+<meta name="description" content="The Mindshort app: connect a TikTok account with TikTok Login Kit, confirm the account, choose a finished video and publish it to that TikTok profile with the TikTok Content Posting API.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">M</span>
+      <span class="brand-name">Mindshort
+        <span class="brand-tag">TikTok publishing tool</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="app.html" class="active">App</a>
+      <a href="confidentialite.html">Privacy Policy</a>
+      <a href="conditions.html">Terms of Use</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">The app</span>
+      <h1>Mindshort <span class="accent">App</span></h1>
+      <p class="lead">The publishing tool for Mindshort's TikTok accounts, operated by Maxime Mandeville in Longueuil, Quebec, Canada. This is the working screen of the tool: connect a TikTok account, confirm it, then publish finished Mindshort videos to that profile.</p>
+    </div>
+  </section>
+
+  <section class="section" id="connect">
+    <div class="wrap">
+      <h2>Connect your <span class="accent">TikTok account</span></h2>
+      <p>The app connects to TikTok through TikTok Login Kit. Click the button below to open TikTok's own sign in page, review the permissions requested, and authorize the connection. TikTok handles the sign in itself: the app never sees or stores your TikTok password.</p>
+      <p>After you authorize, TikTok returns you to this website and the app confirms which account is connected, showing its display name, username and avatar before anything can be published.</p>
+      <div class="connect-actions">
+        <a class="btn-tiktok" href="https://www.tiktok.com/v2/auth/authorize/?client_key=awx0e8of6xzxha2v&scope=user.info.basic,user.info.profile,video.upload,video.publish&response_type=code&redirect_uri=https://maximemandeville.github.io/callback/">Sign in with TikTok</a>
+      </div>
+      <p class="note">You can review or revoke the app's access at any time from your TikTok settings. Revoking the access disconnects the account from the app.</p>
+    </div>
+  </section>
+
+  <section class="section" id="publish">
+    <div class="wrap">
+      <h2>Publish a <span class="accent">video</span></h2>
+      <p>Once an account is connected, the publishing screen of the app works in five steps. The user stays in control at every step, and nothing is posted without the user's own publish action.</p>
+      <div class="steps steps-five">
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Choose the video file</h3>
+          <p>Select a finished video file from your own library. The app does not browse, download or reuse anyone else's content.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Write the title and caption</h3>
+          <p>Enter the title and the caption exactly as they should appear with the video on TikTok.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Set the privacy setting</h3>
+          <p>Choose who can view the post on TikTok before sending it, using the privacy options TikTok offers for the connected account.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">4</span>
+          <h3>Publish</h3>
+          <p>Press the publish button. The app uploads the video to TikTok through the Content Posting API and posts it to the connected profile.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">5</span>
+          <h3>Check the status</h3>
+          <p>The app shows the publishing status returned by TikTok, so the user can confirm the post went through and view it in TikTok.</p>
+        </div>
+      </div>
+      <p class="note">Publishing requires a connected TikTok account. If no account is connected, the publish action stays unavailable and the app asks the user to sign in first, using the button in the section above.</p>
+    </div>
+  </section>
+
+  <section class="section" id="permissions">
+    <div class="wrap">
+      <h2>Permissions <span class="accent">used</span></h2>
+      <p>The app only requests the TikTok permissions it needs to connect an account and publish content the user has chosen. Here is what each permission is used for, in plain language.</p>
+      <ul class="scope-list">
+        <li>
+          <span class="scope-name">Basic account information (user.info.basic)</span>
+          Identifies the account that signed in, so the app knows which profile is connected.
+        </li>
+        <li>
+          <span class="scope-name">Profile information (user.info.profile)</span>
+          Shows the display name, avatar and public profile details inside the app, so the user can confirm the account before posting.
+        </li>
+        <li>
+          <span class="scope-name">Video upload (video.upload)</span>
+          Sends the video file the user selected to TikTok, ready to be posted.
+        </li>
+        <li>
+          <span class="scope-name">Video publishing (video.publish)</span>
+          Publishes that uploaded video, with the user's caption, to the user's own TikTok profile.
+        </li>
+      </ul>
+      <p>Full details about the information the app accesses and how it is handled are in the <a href="confidentialite.html">Privacy Policy</a>, and the rules for using the app are in the <a href="conditions.html">Terms of Use</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand" href="index.html">
+        <span class="brand-mark">M</span>
+        <span class="brand-name">Mindshort</span>
+      </a>
+      <p>Content management and publishing tool for Mindshort's TikTok accounts. Operated by Maxime Mandeville, Longueuil, Quebec, Canada.</p>
+      <p>© 2026 Maxime Mandeville (Mindshort). All rights reserved.</p>
+    </div>
+    <nav class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="app.html">App</a>
+      <a href="confidentialite.html">Privacy Policy</a>
+      <a href="conditions.html">Terms of Use</a>
+      <a href="mailto:maxime.mandeville1@gmail.com">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

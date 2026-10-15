@@ -408,6 +408,39 @@ a:hover {
   max-width: 560px;
 }
 
+/* App page */
+
+.connect-actions {
+  margin: 26px 0 6px;
+}
+
+.btn-tiktok {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #161823;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 17px;
+  padding: 13px 26px;
+  border-radius: 10px;
+  border: 1px solid #3a3d52;
+}
+
+.btn-tiktok:hover {
+  background: #000000;
+  border-color: #fe2c55;
+  text-decoration: none;
+}
+
+.section p.note {
+  font-size: 15.5px;
+}
+
+.steps-five {
+  grid-template-columns: repeat(5, 1fr);
+}
+
 /* Responsive */
 
 @media (max-width: 860px) {
