@@ -1,21 +1,162 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mindshort</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 720px; margin: 60px auto; padding: 0 20px; line-height: 1.6; color: #222; text-align: center; }
-  a { display: inline-block; margin: 10px; color: #0b5fff; }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindshort | TikTok Content Publishing Tool</title>
+<meta name="description" content="Mindshort is a content management and publishing tool that lets an authorized user connect a TikTok account, choose a video, write its caption and publish it to that TikTok profile.">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<img src="logo.png" alt="Mindshort" style="width:120px;height:120px;">
-<h1>Mindshort</h1>
-<p>Développement personnel, confiance en soi, mindset.</p>
-<p>
-<a href="confidentialite.html">Politique de confidentialité</a> ·
-<a href="conditions.html">Conditions d'utilisation</a>
-</p>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">M</span>
+      <span class="brand-name">Mindshort
+        <span class="brand-tag">TikTok publishing tool</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="confidentialite.html">Privacy Policy</a>
+      <a href="conditions.html">Terms of Use</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Mindshort</span>
+      <h1>Publish Mindshort videos to TikTok from <span class="accent">one simple workspace</span>.</h1>
+      <p class="lead">Mindshort is a content management and publishing tool operated by Maxime Mandeville in Longueuil, Quebec, Canada. It lets the signed in user connect a TikTok account, choose a finished video, write its caption, and publish the video directly to that TikTok profile.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#how-it-works">See how it works</a>
+        <a class="btn ghost" href="confidentialite.html">Read the Privacy Policy</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>What this tool <span class="accent">does</span></h2>
+      <p>Mindshort produces short French language mindset videos for TikTok, including content related to its program <strong>Le Déclic</strong>. This tool exists for one job: getting those finished videos onto the company's TikTok profiles in a controlled way, with the right account, the right caption and the account holder's authorization at every step.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Account confirmation</h3>
+          <p>After signing in with TikTok, the tool shows the connected account's display name, username and avatar, so the user can confirm the right account is connected before anything is posted.</p>
+        </div>
+        <div class="card">
+          <h3>Video selection</h3>
+          <p>The user chooses a finished video file from their own library. The tool does not browse, download or reuse anyone else's content.</p>
+        </div>
+        <div class="card">
+          <h3>Caption writing</h3>
+          <p>The user writes or edits the caption that will appear with the video on TikTok. The published text is always the text the user approved.</p>
+        </div>
+        <div class="card">
+          <h3>Direct publishing</h3>
+          <p>With the user's authorization, the tool uploads the selected video to TikTok and publishes it to the connected TikTok profile. Nothing is posted without the user's action.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="wrap">
+      <h2>How it <span class="accent">works</span></h2>
+      <p>Four steps, start to finish. The flow uses TikTok Login Kit for sign in and the TikTok Content Posting API for the upload and the post.</p>
+      <div class="steps">
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Sign in with TikTok</h3>
+          <p>The user signs in with TikTok and grants the permissions the tool requests. Sign in is handled by TikTok itself; the tool never sees the user's password.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Confirm the account</h3>
+          <p>The tool displays the connected account's basic profile information, so the user can verify exactly which TikTok profile will receive the post.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Prepare the post</h3>
+          <p>The user selects a finished video file and writes the caption that will be published with it.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">4</span>
+          <h3>Publish</h3>
+          <p>The tool uploads the video to TikTok and publishes it to the connected profile. The user can then view the live post in TikTok.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>TikTok connection and <span class="accent">permissions</span></h2>
+      <p>The tool connects to TikTok through TikTok for Developers and only requests the permissions it needs to publish content the user has chosen. Here is what each permission is used for, in plain language.</p>
+      <ul class="scope-list">
+        <li>
+          <span class="scope-name">Basic account information (user.info.basic)</span>
+          Identifies the account that signed in, so the tool knows which profile is connected.
+        </li>
+        <li>
+          <span class="scope-name">Profile information (user.info.profile)</span>
+          Shows the display name, avatar and public profile details inside the tool, so the user can confirm the account before posting.
+        </li>
+        <li>
+          <span class="scope-name">Video upload (video.upload)</span>
+          Sends the video file the user selected to TikTok, ready to be posted.
+        </li>
+        <li>
+          <span class="scope-name">Video publishing (video.publish)</span>
+          Publishes that uploaded video, with the user's caption, to the user's own TikTok profile.
+        </li>
+      </ul>
+      <p>The account holder can review or revoke the tool's access at any time from their TikTok settings. Full details about the information the tool accesses and how it is handled are in the <a href="confidentialite.html">Privacy Policy</a>, and the rules for using the tool are in the <a href="conditions.html">Terms of Use</a>.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Who this tool is <span class="accent">for</span></h2>
+      <p>Mindshort is built for the Mindshort business itself: a small company operated by <strong>Maxime Mandeville</strong> in Longueuil, Quebec, Canada, that creates French language mindset content for TikTok. The tool is used to publish the company's own finished videos to the company's own TikTok accounts. It is not a general purpose social media service, it is not offered to the public as a posting platform, and accounts are connected only with the account holder's authorization.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>About <span class="accent">Mindshort</span></h2>
+      <p>Mindshort creates short French language videos about mindset, confidence and taking action, published on TikTok. Mindshort also offers <strong>Le Déclic</strong>, a 14 day program built around one short audio and one short chapter per day, with practical exercises. This developer application and this website exist so the Mindshort team can publish that content to TikTok with TikTok's official tools.</p>
+      <div class="contact-band">
+        <h2>Contact</h2>
+        <p><strong>Operator:</strong> Maxime Mandeville (Mindshort), Longueuil, Quebec, Canada</p>
+        <p><strong>Email:</strong> <a href="mailto:maxime.mandeville1@gmail.com">maxime.mandeville1@gmail.com</a></p>
+        <p>Questions about this tool, a privacy request, or a connected account can all be sent to that address.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a class="brand" href="index.html">
+        <span class="brand-mark">M</span>
+        <span class="brand-name">Mindshort</span>
+      </a>
+      <p>Content management and publishing tool for Mindshort's TikTok accounts. Operated by Maxime Mandeville, Longueuil, Quebec, Canada.</p>
+      <p>© 2026 Maxime Mandeville (Mindshort). All rights reserved.</p>
+    </div>
+    <nav class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="confidentialite.html">Privacy Policy</a>
+      <a href="conditions.html">Terms of Use</a>
+      <a href="mailto:maxime.mandeville1@gmail.com">Contact</a>
+    </nav>
+  </div>
+</footer>
+
 </body>
 </html>
