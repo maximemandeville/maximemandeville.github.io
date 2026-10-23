@@ -79,8 +79,9 @@ a:hover {
   justify-content: center;
   width: 42px;
   height: 42px;
-  background: var(--orange);
-  color: #101010;
+  background: #050505;
+  color: var(--orange);
+  border: 2px solid var(--orange);
   font-weight: 800;
   font-size: 24px;
   border-radius: 9px;
