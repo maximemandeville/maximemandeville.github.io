@@ -392,7 +392,7 @@
     <section id="demande">
       <div class="wrap">
         <h2>Demande d'évaluation</h2>
-        <p class="section-intro">Remplissez ce formulaire, puis envoyez le courriel déjà préparé qui s'ouvrira dans votre application de courriel. La réception de ce courriel, avec la date et le nom de votre référente, documente votre demande et votre consentement.</p>
+        <p class="section-intro">Remplissez ce formulaire et cliquez sur « Envoyer ma demande » : votre demande est envoyée directement à Maxime Mandeville, sans passer par votre application de courriel. La réception de ce courriel, avec la date et le nom de votre référente, documente votre demande et votre consentement.</p>
 
         <form class="form-card" id="evalForm" novalidate>
           <div class="form-ref">Référente : <strong>Jocelyne Sema, CPA, SEMA Stratégies</strong> <span>(déjà inscrit dans votre demande)</span></div>
@@ -444,9 +444,9 @@
             <button type="submit" class="btn btn-red btn-submit">Envoyer ma demande</button>
           </div>
 
-          <p class="after-msg" id="afterMsg" role="status">Votre application de courriel va s'ouvrir avec votre demande déjà remplie. Il ne reste qu'à l'envoyer. Si rien ne s'ouvre, appelez directement le 514-835-7399.</p>
+          <p class="after-msg" id="afterMsg" role="status">Votre demande sera envoyée directement à Maxime Mandeville. En cas de problème, appelez le 514-835-7399.</p>
 
-          <p class="form-fineprint">En cliquant sur « Envoyer ma demande », un courriel prérempli s'ouvre dans votre application de courriel, adressé à Maxime Mandeville. Vous l'envoyez depuis votre propre courriel : rien n'est transmis avant ce geste de votre part.</p>
+          <p class="form-fineprint">En cliquant sur « Envoyer ma demande », votre demande est transmise directement à Maxime Mandeville. Un message de confirmation s'affiche ici même dès que l'envoi est réussi.</p>
         </form>
       </div>
     </section>
@@ -526,31 +526,52 @@
           var dateStr = now.toLocaleDateString('fr-CA', { year: 'numeric', month: 'long', day: 'numeric' });
           var timeStr = now.toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' });
 
-          var lines = [
-            "Demande d'évaluation de la valeur marchande d'un immeuble",
-            'Référente : Jocelyne Sema, CPA, SEMA Stratégies',
-            'Date de la demande : ' + dateStr + ', ' + timeStr,
-            '',
-            'Nom complet : ' + val('f-nom'),
-            'Téléphone : ' + val('f-tel'),
-            'Courriel : ' + val('f-courriel'),
-            "Adresse de l'immeuble : " + val('f-adresse'),
-            'Revenus annuels bruts de la propriété : ' + val('f-revenus') + ' $'
-          ];
-          if (val('f-logements')) lines.push('Nombre de logements : ' + val('f-logements'));
-          if (val('f-grandeur')) lines.push('Grandeur des logements : ' + val('f-grandeur'));
-          if (val('f-message')) lines.push('Message : ' + val('f-message'));
-          lines.push('');
-          lines.push("Consentement : Je consens à ce que Maxime Mandeville me contacte au sujet de l'évaluation de mon immeuble, et à ce que le rapport soit transmis à Jocelyne Sema pour son dossier.");
-          lines.push('(Case de consentement cochée sur la page partenaire de Jocelyne Sema, le ' + dateStr + '.)');
+          var payload = {
+            _subject: "Demande d'évaluation, référence Jocelyne Sema",
+            _template: 'table',
+            _captcha: 'false',
+            'Nom complet': val('f-nom'),
+            'Téléphone': val('f-tel'),
+            'Courriel': val('f-courriel'),
+            "Adresse de l'immeuble": val('f-adresse'),
+            'Revenus annuels bruts': val('f-revenus') + ' $',
+            'Référente': 'Jocelyne Sema, CPA, SEMA Stratégies',
+            'Date de la demande': dateStr + ', ' + timeStr,
+            'Consentement': "Je consens à ce que Maxime Mandeville me contacte au sujet de l'évaluation de mon immeuble, et à ce que le rapport soit transmis à Jocelyne Sema pour son dossier. (Case de consentement cochée sur la page partenaire de Jocelyne Sema, le " + dateStr + ".)"
+          };
+          if (val('f-logements')) payload['Nombre de logements'] = val('f-logements');
+          if (val('f-grandeur')) payload['Grandeur des logements'] = val('f-grandeur');
+          if (val('f-message')) payload['Message'] = val('f-message');
 
-          var subject = "Demande d'évaluation, référence Jocelyne Sema";
-          var href = 'mailto:maxime.mandeville1@gmail.com'
-            + '?subject=' + encodeURIComponent(subject)
-            + '&body=' + encodeURIComponent(lines.join('\n'));
-
+          var submitBtn = form.querySelector('button[type="submit"]');
+          if (submitBtn) submitBtn.disabled = true;
+          afterMsg.textContent = 'Envoi de votre demande en cours...';
           afterMsg.classList.add('show');
-          window.location.href = href;
+
+          fetch('https://formsubmit.co/ajax/maxime.mandeville1@gmail.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+          })
+          .then(function (resp) {
+            if (!resp.ok) throw new Error('Envoi refusé');
+            return resp.json();
+          })
+          .then(function (data) {
+            if (data && (data.success === true || data.success === 'true')) {
+              afterMsg.textContent = 'Votre demande est envoyée. Maxime Mandeville la reçoit directement et vous contactera sous peu. Merci !';
+              form.reset();
+            } else {
+              throw new Error('Envoi non confirmé');
+            }
+          })
+          .catch(function () {
+            afterMsg.textContent = "L'envoi n'a pas fonctionné. Veuillez réessayer, ou appelez directement le 514-835-7399.";
+          })
+          .then(function () {
+            if (submitBtn) submitBtn.disabled = false;
+            afterMsg.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          });
         });
 
         /* ---------- Code QR officiel : généré depuis l'adresse de cette page ---------- */
